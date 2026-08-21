@@ -1,150 +1,614 @@
 <!DOCTYPE html>
 <html lang="az">
+
 <head>
+  <!--
+    Кодировка UTF-8 обязательна для корректного отображения
+    азербайджанских букв и Unicode-символов.
+  -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Görünməyən və qeyri-adi Unicode simvollarını aşkarlayan və təmizləyən brauzer əsaslı alət." />
+
+  <!--
+    Делает страницу адаптивной для смартфонов и планшетов.
+  -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <!--
+    Описание страницы для поисковых систем.
+  -->
+  <meta
+    name="description"
+    content="Görünməyən və qeyri-adi Unicode simvollarını aşkarlayan və təmizləyən brauzer əsaslı alət."
+  />
+
+  <!-- Название вкладки браузера -->
   <title>Unicode Cleaner</title>
-  <link rel="stylesheet" href="style.css?v=3" />
- </head>
+
+  <!--
+    Подключаем внешний CSS-файл.
+
+    ?v=4 используется для сброса кэша браузера.
+    Если в будущем измените style.css и браузер продолжит
+    показывать старую версию, можно увеличить число:
+    style.css?v=5
+    style.css?v=6
+    и т.д.
+  -->
+  <link rel="stylesheet" href="style.css?v=4" />
+</head>
+
+
 <body>
+
+  <!--
+    Главный контейнер сайта.
+
+    app-shell ограничивает максимальную ширину страницы
+    и центрирует содержимое.
+  -->
   <main class="app-shell">
+
+
+    <!-- =====================================================
+         ШАПКА САЙТА
+    ====================================================== -->
+
     <header class="hero">
-      <div>
-        <p class="eyebrow">Mətn təhlükəsizliyi aləti</p>
-        <h1>Unicode Cleaner</h1>
+
+      <!--
+        Левая часть шапки:
+        маленький заголовок, название сайта и описание.
+      -->
+      <div class="hero-content">
+
+        <p class="eyebrow">
+          Mətn təhlükəsizliyi aləti
+        </p>
+
+        <h1>
+          Unicode Cleaner
+        </h1>
+
+        <!--
+          На компьютере этот текст отображается одной строкой.
+          На мобильных устройствах CSS разрешает перенос.
+        -->
         <p class="subtitle">
           Görünməyən və qeyri-adi Unicode simvollarını aşkarlayın, yerlərini görün və mətni təhlükəsiz şəkildə təmizləyin.
         </p>
+
       </div>
-      <div class="privacy-badge">🔒 Mətn brauzerdən çıxmır</div>
+
+
+      <!--
+        Информационный индикатор приватности.
+
+        Наш JavaScript работает непосредственно в браузере,
+        поэтому введённый текст не отправляется на сервер.
+      -->
+      <div class="privacy-badge">
+        🔒 Mətn brauzerdən çıxmır
+      </div>
+
     </header>
 
+
+
+    <!-- =====================================================
+         1. ПОЛЕ ВВОДА ТЕКСТА
+    ====================================================== -->
+
     <section class="panel">
+
       <div class="section-head">
+
         <div>
           <h2>1. Mətni daxil edin</h2>
-          <p>Mətni yapışdırın və “Analiz et” düyməsini seçin.</p>
+
+          <p>
+            Mətni yapışdırın və “Analiz et” düyməsini seçin.
+          </p>
         </div>
-        <div class="counter"><span id="charCount">0</span> simvol</div>
+
+
+        <!--
+          Счётчик символов.
+
+          Значение автоматически обновляет script.js.
+        -->
+        <div class="counter">
+          <span id="charCount">0</span> simvol
+        </div>
+
       </div>
 
-      <textarea id="inputText" spellcheck="false" placeholder="Mətni buraya daxil edin..."></textarea>
 
+      <!--
+        Основное поле, куда пользователь вставляет текст.
+
+        ID inputText используется JavaScript-кодом.
+        Не изменяйте его без соответствующего изменения script.js.
+      -->
+      <textarea
+        id="inputText"
+        spellcheck="false"
+        placeholder="Mətni buraya daxil edin..."
+      ></textarea>
+
+
+      <!--
+        Под исходным текстом оставляем только две кнопки:
+
+        1. Analiz et
+        2. Sıfırla
+
+        Кнопка очистки теперь находится ниже,
+        непосредственно под выбором режима очистки.
+      -->
       <div class="toolbar">
-        <button id="analyzeBtn" class="btn primary">Analiz et</button>
-        <button id="cleanBtn" class="btn success">Təmizlə</button>
-        <button id="copyBtn" class="btn">Təmiz mətni kopyala</button>
-        <button id="clearBtn" class="btn ghost">Sıfırla</button>
+
+        <!-- Анализирует текст -->
+        <button
+          id="analyzeBtn"
+          class="btn primary"
+          type="button"
+        >
+          Analiz et
+        </button>
+
+
+        <!-- Полностью очищает поля и результаты -->
+        <button
+          id="clearBtn"
+          class="btn ghost"
+          type="button"
+        >
+          Sıfırla
+        </button>
+
       </div>
+
     </section>
 
+
+
+    <!-- =====================================================
+         2. ВЫБОР РЕЖИМА ОЧИСТКИ
+    ====================================================== -->
+
     <section class="panel">
+
       <div class="section-head">
+
         <div>
           <h2>2. Təmizləmə rejimi</h2>
-          <p>Standart rejim normal mətnə ən az müdaxilə edir.</p>
+
+          <p>
+            Mətnin necə təmizlənəcəyini seçin.
+          </p>
         </div>
+
       </div>
 
+
+      <!--
+        Три карточки выбора режима.
+
+        Все три input имеют одинаковое name="mode",
+        поэтому одновременно можно выбрать только один режим.
+      -->
       <div class="mode-grid">
-        <label class="mode-card active">
-          <input type="radio" name="mode" value="safe" checked />
-          <span class="mode-title">Təhlükəsiz</span>
-          <span class="mode-desc">Zero-width və tipik gizli format simvollarını silir.</span>
-        </label>
+
+
+        <!-- =================================================
+             РЕЖИМ 1 — БЕЗОПАСНЫЙ
+        ================================================== -->
 
         <label class="mode-card">
-          <input type="radio" name="mode" value="extended" />
-          <span class="mode-title">Geniş</span>
-          <span class="mode-desc">Bidi idarəetmə simvollarını da silir.</span>
+
+          <!--
+            checked означает, что этот режим выбран
+            по умолчанию при загрузке страницы.
+          -->
+          <input
+            type="radio"
+            name="mode"
+            value="safe"
+            checked
+          />
+
+          <span class="mode-title">
+            Təhlükəsiz
+          </span>
+
+          <span class="mode-desc">
+            Zero-width və tipik gizli format simvollarını silir.
+          </span>
+
         </label>
 
+
+
+        <!-- =================================================
+             РЕЖИМ 2 — РАСШИРЕННЫЙ
+        ================================================== -->
+
         <label class="mode-card">
-          <input type="radio" name="mode" value="normalize" />
-          <span class="mode-title">Normallaşdırma</span>
-          <span class="mode-desc">Qeyri-standart boşluqları adi boşluğa çevirir.</span>
+
+          <input
+            type="radio"
+            name="mode"
+            value="extended"
+          />
+
+          <span class="mode-title">
+            Geniş
+          </span>
+
+          <span class="mode-desc">
+            Bidi idarəetmə və əlavə görünməyən format simvollarını da silir.
+          </span>
+
         </label>
+
+
+
+        <!-- =================================================
+             РЕЖИМ 3 — НОРМАЛИЗАЦИЯ
+        ================================================== -->
+
+        <label class="mode-card">
+
+          <input
+            type="radio"
+            name="mode"
+            value="normalize"
+          />
+
+          <span class="mode-title">
+            Normallaşdırma
+          </span>
+
+          <span class="mode-desc">
+            Qeyri-standart boşluqları adi boşluğa çevirir və geniş təmizləmə aparır.
+          </span>
+
+        </label>
+
       </div>
+
+
+      <!--
+        Кнопка Təmizlə перенесена сюда.
+
+        Теперь пользователь сначала выбирает режим,
+        а затем нажимает кнопку очистки.
+      -->
+      <div class="clean-toolbar">
+
+        <button
+          id="cleanBtn"
+          class="btn success clean-btn"
+          type="button"
+        >
+          Təmizlə
+        </button>
+
+      </div>
+
     </section>
+
+
+
+    <!-- =====================================================
+         КРАТКАЯ СТАТИСТИКА
+    ====================================================== -->
 
     <section class="stats-grid">
+
+
+      <!--
+        Общее количество обнаруженных подозрительных
+        Unicode-символов.
+      -->
       <article class="stat-card">
-        <span class="stat-label">Aşkarlanan şübhəli simvollar</span>
-        <strong id="suspiciousCount">0</strong>
+
+        <span class="stat-label">
+          Aşkarlanan şübhəli simvollar
+        </span>
+
+        <strong id="suspiciousCount">
+          0
+        </strong>
+
       </article>
+
+
+
+      <!--
+        Количество разных типов Unicode-символов.
+        Например U+200B и U+2060 = 2 разных типа.
+      -->
       <article class="stat-card">
-        <span class="stat-label">Fərqli Unicode növləri</span>
-        <strong id="typeCount">0</strong>
+
+        <span class="stat-label">
+          Fərqli Unicode növləri
+        </span>
+
+        <strong id="typeCount">
+          0
+        </strong>
+
       </article>
+
+
+
+      <!--
+        Показывает количество изменений,
+        которые будут выполнены выбранным режимом очистки.
+      -->
       <article class="stat-card">
-        <span class="stat-label">Təmizləmədən sonra dəyişiklik</span>
-        <strong id="changeCount">0</strong>
+
+        <span class="stat-label">
+          Təmizləmədən sonra dəyişiklik
+        </span>
+
+        <strong id="changeCount">
+          0
+        </strong>
+
       </article>
+
     </section>
 
+
+
+    <!-- =====================================================
+         3. ТАБЛИЦА ОБНАРУЖЕННЫХ СИМВОЛОВ
+    ====================================================== -->
+
     <section class="panel">
+
       <div class="section-head">
+
         <div>
           <h2>3. Aşkarlanan simvollar</h2>
-          <p>Unicode kodu, adı, sayı və ilk mövqeləri göstərilir.</p>
+
+          <p>
+            Unicode kodu, adı, sayı və mətndəki mövqeləri göstərilir.
+          </p>
         </div>
+
       </div>
 
+
+      <!--
+        На маленьком экране таблица может быть шире страницы.
+        table-wrap позволяет прокручивать её горизонтально.
+      -->
       <div class="table-wrap">
+
         <table>
+
           <thead>
             <tr>
-              <th>Unicode</th>
-              <th>Ad</th>
-              <th>Kateqoriya</th>
-              <th>Say</th>
-              <th>Mövqelər</th>
-              <th>Əməl</th>
+
+              <th>
+                Unicode
+              </th>
+
+              <th>
+                Ad
+              </th>
+
+              <th>
+                Kateqoriya
+              </th>
+
+              <th>
+                Say
+              </th>
+
+              <th>
+                Mövqelər
+              </th>
+
+              <th>
+                Əməl
+              </th>
+
             </tr>
           </thead>
+
+
+          <!--
+            JavaScript автоматически заменяет содержимое tbody
+            после анализа текста.
+          -->
           <tbody id="resultsBody">
+
             <tr class="empty-row">
-              <td colspan="6">Hələ analiz aparılmayıb.</td>
+
+              <td colspan="6">
+                Hələ analiz aparılmayıb.
+              </td>
+
             </tr>
+
           </tbody>
+
         </table>
+
       </div>
+
     </section>
 
-    <section class="panel">
-      <div class="section-head">
-        <div>
-          <h2>4. Vizual görünüş</h2>
-          <p>Görünməyən simvollar mətndə ⟦U+XXXX⟧ formatında işarələnir.</p>
-        </div>
-      </div>
-      <div id="visualizedText" class="visualized placeholder">Analiz nəticəsi burada görünəcək.</div>
-    </section>
+
+
+    <!-- =====================================================
+         4. ВИЗУАЛЬНОЕ ОТОБРАЖЕНИЕ СКРЫТЫХ СИМВОЛОВ
+    ====================================================== -->
 
     <section class="panel">
+
       <div class="section-head">
+
         <div>
-          <h2>5. Təmizlənmiş mətn</h2>
-          <p>Seçilmiş rejimə uyğun nəticə.</p>
+
+          <h2>
+            4. Vizual görünüş
+          </h2>
+
+          <p>
+            Görünməyən simvollar mətndə ⟦U+XXXX⟧ formatında göstərilir.
+          </p>
+
         </div>
+
       </div>
-      <textarea id="cleanedText" spellcheck="false" readonly placeholder="Təmizlənmiş mətn burada görünəcək..."></textarea>
+
+
+      <!--
+        Здесь исходный невидимый символ превращается
+        в заметную метку.
+
+        Например:
+
+        Yeni​Klinika
+
+        будет визуализировано примерно как:
+
+        Yeni⟦U+200B⟧Klinika
+      -->
+      <div
+        id="visualizedText"
+        class="visualized placeholder"
+      >
+        Analiz nəticəsi burada görünəcək.
+      </div>
+
     </section>
+
+
+
+    <!-- =====================================================
+         5. ОЧИЩЕННЫЙ ТЕКСТ
+    ====================================================== -->
+
+    <section class="panel">
+
+      <div class="section-head cleaned-head">
+
+        <div>
+
+          <h2>
+            5. Təmizlənmiş mətn
+          </h2>
+
+          <p>
+            Seçilmiş rejimə uyğun nəticə.
+          </p>
+
+        </div>
+
+
+        <!--
+          Кнопку копирования перенесли сюда.
+
+          Она копирует уже очищенный текст.
+        -->
+        <button
+          id="copyBtn"
+          class="btn copy-btn"
+          type="button"
+        >
+          Kopyala
+        </button>
+
+      </div>
+
+
+      <!--
+        Поле readonly:
+        пользователь может выделять текст,
+        но случайно изменить его не сможет.
+      -->
+      <textarea
+        id="cleanedText"
+        spellcheck="false"
+        readonly
+        placeholder="Təmizlənmiş mətn burada görünəcək..."
+      ></textarea>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ
+    ====================================================== -->
 
     <aside class="notice">
-      <strong>Vacib qeyd:</strong>
-      Görünməyən Unicode simvollarının mövcudluğu mətnin AI tərəfindən yaradıldığını sübut etmir.
+
+      <strong>
+        Vacib qeyd:
+      </strong>
+
+      Görünməyən Unicode simvollarının mövcudluğu mətnin süni intellekt tərəfindən yaradıldığını sübut etmir.
       Bu alət yalnız qeyri-adi və görünməyən Unicode simvollarını texniki baxımdan aşkarlayır və təmizləyir.
+
     </aside>
 
+
+
+    <!-- =====================================================
+         НИЖНЯЯ ЧАСТЬ САЙТА
+    ====================================================== -->
+
     <footer>
+
       Unicode Cleaner · Lokal brauzer aləti
+
     </footer>
+
   </main>
 
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="script.js"></script>
+
+  <!-- =====================================================
+       TOAST — ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ
+  ====================================================== -->
+
+  <!--
+    Здесь JavaScript показывает короткие сообщения:
+
+    "Analiz tamamlandı"
+    "Mətn təmizləndi"
+    "Təmiz mətn kopyalandı"
+    и т.д.
+  -->
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <!--
+    ?v=4 также используется для предотвращения загрузки
+    старой закэшированной версии JavaScript.
+  -->
+  <script src="script.js?v=4"></script>
+
 </body>
+
 </html>
