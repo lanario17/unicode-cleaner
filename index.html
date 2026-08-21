@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pasiyent məmnuniyyəti sorğusu / Patient satisfaction survey">
+  <title>Pasiyent məmnuniyyəti sorğusu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Ana səhifə">
+      <span class="brand-mark">L17</span>
+      <span class="brand-name">Sorğu platforması</span>
+    </a>
+
+    <div class="language-switcher" aria-label="Dil seçimi">
+      <button class="language-button active" type="button" data-language="az">AZ</button>
+      <button class="language-button" type="button" data-language="en">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow"
+           data-az="Rəyiniz bizim üçün önəmlidir"
+           data-en="Your feedback matters">
+          Rəyiniz bizim üçün önəmlidir
+        </p>
+
+        <h1
+          data-az="Pasiyent məmnuniyyəti sorğusu"
+          data-en="Patient satisfaction survey">
+          Pasiyent məmnuniyyəti sorğusu
+        </h1>
+
+        <p class="hero-text"
+           data-az="Göstərilən xidmətlərin keyfiyyətini yaxşılaşdırmaq üçün qısa sorğuda iştirak edin."
+           data-en="Take part in a short survey to help us improve the quality of our services.">
+          Göstərilən xidmətlərin keyfiyyətini yaxşılaşdırmaq üçün qısa sorğuda iştirak edin.
+        </p>
+
+        <!-- Google Form və ya başqa sorğu linkini href hissəsinə əlavə edin. -->
+        <a class="primary-button"
+           id="survey-link"
+           href="#"
+           data-az="Sorğuya başla"
+           data-en="Start survey">
+          Sorğuya başla
+        </a>
+
+        <p class="privacy-note"
+           data-az="Sorğunun doldurulması bir neçə dəqiqə çəkir."
+           data-en="The survey takes only a few minutes to complete.">
+          Sorğunun doldurulması bir neçə dəqiqə çəkir.
+        </p>
+      </div>
+
+      <div class="hero-card" aria-hidden="true">
+        <div class="illustration">
+          <div class="illustration-icon">✓</div>
+          <div class="illustration-line long"></div>
+          <div class="illustration-line"></div>
+          <div class="illustration-line medium"></div>
+          <div class="illustration-options">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" aria-label="Üstünlüklər">
+      <article class="feature-card">
+        <span class="feature-number">01</span>
+        <h2 data-az="Rahat" data-en="Simple">Rahat</h2>
+        <p data-az="İstənilən cihazdan asanlıqla doldurun."
+           data-en="Complete the survey easily from any device.">
+          İstənilən cihazdan asanlıqla doldurun.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-number">02</span>
+        <h2 data-az="Sürətli" data-en="Quick">Sürətli</h2>
+        <p data-az="Sorğu yalnız bir neçə dəqiqə çəkir."
+           data-en="The survey takes only a few minutes.">
+          Sorğu yalnız bir neçə dəqiqə çəkir.
+        </p>
+      </article>
+
+      <article class="feature-card">
+        <span class="feature-number">03</span>
+        <h2 data-az="Faydalı" data-en="Valuable">Faydalı</h2>
+        <p data-az="Rəyiniz xidmətlərin təkmilləşdirilməsinə kömək edir."
+           data-en="Your feedback helps improve our services.">
+          Rəyiniz xidmətlərin təkmilləşdirilməsinə kömək edir.
+        </p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="current-year"></span> Lanario17</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
