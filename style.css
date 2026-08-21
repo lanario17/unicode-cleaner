@@ -23,32 +23,42 @@ html {
 
 body {
   margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--text);
 }
 
-button, textarea, input {
+button,
+textarea,
+input {
   font: inherit;
 }
+
+/* =========================
+   ОСНОВНОЙ КОНТЕЙНЕР
+========================= */
 
 .app-shell {
   width: min(1180px, calc(100% - 32px));
   margin: 36px auto 60px;
 }
 
+/* =========================
+   ШАПКА
+========================= */
+
 .hero {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: flex-start;
+  position: relative;
+  display: block;
   margin-bottom: 24px;
+  padding-right: 220px;
 }
 
 .eyebrow {
   margin: 0 0 8px;
   text-transform: uppercase;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   font-size: 12px;
   font-weight: 800;
   color: var(--primary);
@@ -62,20 +72,34 @@ h1 {
 }
 
 .subtitle {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
   white-space: nowrap;
-  font-size: clamp(14px, 1.4vw, 17px);
+  max-width: none;
 }
 
 .privacy-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+
   white-space: nowrap;
   background: #eaf8f2;
   color: #087f5b;
   border: 1px solid #c7eadc;
+
   padding: 10px 14px;
   border-radius: 999px;
+
   font-weight: 700;
   font-size: 14px;
 }
+
+/* =========================
+   ПАНЕЛИ
+========================= */
 
 .panel {
   background: var(--panel);
@@ -111,23 +135,36 @@ h1 {
   white-space: nowrap;
 }
 
+/* =========================
+   TEXTAREA
+========================= */
+
 textarea {
   width: 100%;
   min-height: 220px;
   resize: vertical;
+
   padding: 16px;
+
   border: 1px solid var(--border);
   border-radius: 12px;
+
   outline: none;
+
   background: #fbfdff;
   color: var(--text);
+
   line-height: 1.6;
 }
 
 textarea:focus {
   border-color: #93b4ff;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, .08);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
 }
+
+/* =========================
+   КНОПКИ
+========================= */
 
 .toolbar {
   display: flex;
@@ -140,11 +177,15 @@ textarea:focus {
   border: 1px solid var(--border);
   background: white;
   color: var(--text);
+
   padding: 10px 15px;
   border-radius: 10px;
+
   cursor: pointer;
+
   font-weight: 750;
-  transition: .15s ease;
+
+  transition: 0.15s ease;
 }
 
 .btn:hover {
@@ -176,6 +217,10 @@ textarea:focus {
   background: transparent;
 }
 
+/* =========================
+   РЕЖИМЫ ОЧИСТКИ
+========================= */
+
 .mode-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -185,10 +230,14 @@ textarea:focus {
 .mode-card {
   position: relative;
   display: block;
+
   padding: 16px;
+
   border: 1px solid var(--border);
   border-radius: 13px;
+
   cursor: pointer;
+
   background: #fbfdff;
 }
 
@@ -211,36 +260,52 @@ textarea:focus {
 
 .mode-desc {
   display: block;
+
   font-size: 13px;
   line-height: 1.45;
+
   color: var(--muted);
 }
+
+/* =========================
+   СТАТИСТИКА
+========================= */
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
+
   margin-top: 18px;
 }
 
 .stat-card {
   background: var(--panel);
+
   border: 1px solid var(--border);
   border-radius: 16px;
+
   padding: 18px;
+
   box-shadow: var(--shadow);
 }
 
 .stat-label {
   display: block;
+
   font-size: 13px;
   color: var(--muted);
+
   margin-bottom: 8px;
 }
 
 .stat-card strong {
   font-size: 30px;
 }
+
+/* =========================
+   ТАБЛИЦА
+========================= */
 
 .table-wrap {
   overflow-x: auto;
@@ -252,18 +317,24 @@ table {
   min-width: 760px;
 }
 
-th, td {
+th,
+td {
   padding: 12px 10px;
+
   text-align: left;
+
   border-bottom: 1px solid #edf1f6;
+
   vertical-align: top;
 }
 
 th {
   font-size: 12px;
+
   color: var(--muted);
+
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 td {
@@ -272,11 +343,16 @@ td {
 
 .code-pill {
   display: inline-block;
+
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   background: #eef2f7;
+
   padding: 4px 7px;
   border-radius: 7px;
+
   font-size: 12px;
+
   white-space: nowrap;
 }
 
@@ -292,20 +368,32 @@ td {
 
 .empty-row td {
   color: var(--muted);
+
   text-align: center;
+
   padding: 30px;
 }
+
+/* =========================
+   ВИЗУАЛИЗАЦИЯ UNICODE
+========================= */
 
 .visualized {
   min-height: 120px;
   max-height: 320px;
+
   overflow: auto;
+
   padding: 16px;
+
   border: 1px solid var(--border);
   border-radius: 12px;
+
   background: #fbfdff;
+
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+
   line-height: 1.65;
 }
 
@@ -315,48 +403,84 @@ td {
 
 .marker {
   display: inline-block;
+
   margin: 0 2px;
   padding: 1px 5px;
+
   border-radius: 5px;
+
   background: #fff0e8;
   color: #a13d0a;
+
   border: 1px solid #ffd4be;
+
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   font-size: 12px;
 }
 
+/* =========================
+   ПРЕДУПРЕЖДЕНИЕ
+========================= */
+
 .notice {
   margin-top: 20px;
+
   border-left: 4px solid #f59e0b;
+
   background: #fff9e8;
+
   padding: 16px 18px;
+
   border-radius: 10px;
+
   color: #5c4711;
+
   line-height: 1.55;
   font-size: 14px;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 footer {
   text-align: center;
+
   color: var(--muted);
+
   padding: 24px 0 0;
+
   font-size: 13px;
 }
 
+/* =========================
+   TOAST
+========================= */
+
 .toast {
   position: fixed;
+
   right: 20px;
   bottom: 20px;
+
   background: #172033;
   color: white;
+
   border-radius: 10px;
+
   padding: 12px 15px;
+
   font-weight: 700;
   font-size: 14px;
+
   opacity: 0;
+
   pointer-events: none;
+
   transform: translateY(8px);
-  transition: .2s ease;
+
+  transition: 0.2s ease;
 }
 
 .toast.show {
@@ -364,12 +488,33 @@ footer {
   transform: translateY(0);
 }
 
+/* =========================
+   МОБИЛЬНАЯ ВЕРСИЯ
+========================= */
+
 @media (max-width: 820px) {
+
+  .app-shell {
+    width: min(100% - 22px, 1180px);
+    margin-top: 22px;
+  }
+
   .hero {
-    flex-direction: column;
+    padding-right: 0;
+  }
+
+  .subtitle {
+    white-space: normal;
+    font-size: 15px;
   }
 
   .privacy-badge {
+    position: static;
+
+    display: inline-block;
+
+    margin-top: 16px;
+
     white-space: normal;
   }
 
@@ -380,5 +525,13 @@ footer {
 
   .section-head {
     flex-direction: column;
+  }
+
+  .panel {
+    padding: 17px;
+  }
+
+  textarea {
+    min-height: 180px;
   }
 }
